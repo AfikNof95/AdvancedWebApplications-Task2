@@ -1,0 +1,25 @@
+{
+  "name": "advancedwebapplications-task2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AfikNof95/AdvancedWebApplications-Task2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AfikNof95/AdvancedWebApplications-Task2/issues"
+  },
+  "homepage": "https://github.com/AfikNof95/AdvancedWebApplications-Task2#readme",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "pretty-quick": "^3.1.3"
+  }
+}
