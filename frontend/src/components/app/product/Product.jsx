@@ -16,7 +16,7 @@ function Product(props) {
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>
         <Card.Text>{product.description}</Card.Text>
-        <Card.Text>price {product.price}</Card.Text>
+        <Card.Text>price ${product.price}</Card.Text>
         <Button variant="primary" onClick={() => onAdd(product)}>
           Add to cart
         </Button>

@@ -1,0 +1,26 @@
+#cart-page-layout {
+  height: 88vh;
+}
+
+#cart-sum-continer {
+  border: 2px solid red;
+}
+
+#person-continer {
+border: 2px solid blue;
+}
+
+.cart-card {
+  max-width: 100%;
+  max-height: 180px;
+}
+
+.img-container {
+    overflow: hidden;
+    max-height: 175px;
+}
+
+.qty-wrapper {
+    border: 1px solid grey;
+    border-radius: 7px;
+}
