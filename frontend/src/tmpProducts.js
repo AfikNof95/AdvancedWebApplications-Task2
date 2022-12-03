@@ -1,5 +1,3 @@
-// Pricing thing ₪
-
 export const products = [
   {
     title: "Bannanas",

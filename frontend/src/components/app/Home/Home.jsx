@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import "./mainbody.css";
+import React from "react";
+import "./Home.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Product from "../product/Product";
 
-function Mainbody(props) {
+function Home(props) {
   const { products, onAdd } = props;
 
   return (
-    <div>
+    <div id="home-layout">
       <Container id="display-container">
         <Row>
           {products.map((product, index) => (
@@ -20,4 +20,4 @@ function Mainbody(props) {
   );
 }
 
-export default Mainbody;
+export default Home;

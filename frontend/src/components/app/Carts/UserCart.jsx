@@ -1,10 +1,9 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import "./usercart.css";
+import "./SideCart.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function UserCart(props) {
+function SideCart(props) {
   const { cart, onClose, onAdd, onRemove } = props;
   const cartPrice = cart.reduce((a, c) => a + c.qty * c.price, 0);
   const israelTax = cartPrice * 0.17;
@@ -24,22 +23,22 @@ function UserCart(props) {
           <div className="row" id="wrapper">
             {cart.map((item) => (
               <div key={item.id} className="row">
-                <div className="col-1">{item.title}</div>
-                <div className="col-1">
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
+                <div className="col">{item.title}</div>
+                <div className="col">
+                  <button
+                    type="button"
+                    className="btn btn-success"
                     onClick={() => onAdd(item)}
                   >
                     +
-                  </Button>{" "}
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
                     onClick={() => onRemove(item)}
                   >
                     -
-                  </Button>{" "}
+                  </button>
                 </div>
                 <div className="col-1 text-right">
                   {item.qty} X ${item.price.toFixed(2)}
@@ -74,9 +73,13 @@ function UserCart(props) {
             )}
           </div>
           <div className="row">
-            <Button variant="outline-info" onClick={() => alert("Check")}>
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={() => alert("Check")}
+            >
               Checkout
-            </Button>
+            </button>
           </div>
         </div>
       </Container>
@@ -84,4 +87,4 @@ function UserCart(props) {
   );
 }
 
-export default UserCart;
+export default SideCart;

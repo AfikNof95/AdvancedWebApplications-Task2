@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import AppNavbar from "./navbar/AppNavbar";
-import Mainbody from "./mainbody/Mainbody";
-import UserCart from "./usercart/UserCart";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./NavbarAndLayout/AppLayout";
+import Home from "./Home/Home";
+import CartPage from "./Carts/CartPage";
+import SideCart from "./Carts/UserCart";
 import { products } from "../../tmpProducts";
 import "./App.css";
 
@@ -48,13 +50,33 @@ function App() {
 
   return (
     <div className="App">
-      <AppNavbar
-        shoppingQty={userShoppingCart.length}
-        onCartClick={modalToggle}
-      />
-      <Mainbody onAdd={onAdd} products={products} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AppLayout
+                shoppingQty={userShoppingCart.length}
+                onCartClick={modalToggle}
+              />
+            }
+          >
+            <Route index element={<Home onAdd={onAdd} products={products} />} />
+            <Route
+              path="/Cart"
+              element={
+                <CartPage
+                  cart={userShoppingCart}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
       {isCartDialogOpen && (
-        <UserCart
+        <SideCart
           cart={userShoppingCart}
           onClose={closeDialog}
           onAdd={onAdd}
