@@ -1,9 +1,9 @@
-const ProductService = require("../services/product.service");
+const OrderService = require("../services/order.service");
 
-const ProductController = {
-  async getProduct(req, res) {
+const OrderController = {
+  async getOrder(req, res) {
     try {
-      const product = await ProductService.getProduct(id);
+      const product = await OrderService.getOrder(id);
       return res.json({ data: product });
     } catch (ex) {
       console.error(ex.message);
@@ -12,9 +12,9 @@ const ProductController = {
     }
   },
 
-  async getAllProducts(req, res) {
+  async getAllOrders(req, res) {
     try {
-      const products = await ProductService.getAllProducts();
+      const products = await OrderService.getAllOrders();
       return res.json({ data: products });
     } catch (ex) {
       console.error(ex.message);
@@ -23,9 +23,9 @@ const ProductController = {
     }
   },
 
-  async addProduct(req, res) {
+  async addOrder(req, res) {
     try {
-      const product = await ProductService.addProduct(req.body);
+      const product = await OrderService.addOrder(req.body);
       return res.json({ data: product });
     } catch (ex) {
       console.error(ex.message);
@@ -35,4 +35,4 @@ const ProductController = {
   },
 };
 
-module.exports = ProductController;
+module.exports = OrderController;
