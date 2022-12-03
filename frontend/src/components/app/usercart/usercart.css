@@ -1,0 +1,21 @@
+#user-cart {
+    position: absolute;
+    right: 0;
+    top: 72px;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #3e546d;
+    border-radius: 5px;
+}
+
+#close-cart {
+    background-color: inherit;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: red;
+    font-weight: 600;
+}
