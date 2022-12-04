@@ -8,8 +8,9 @@ import { products } from "../../tmpProducts";
 import "./App.css";
 
 function App() {
-  const [isCartDialogOpen, setIsCartDialogOpen] = useState(false); // change to start false
+  const [isCartDialogOpen, setIsCartDialogOpen] = useState(false);
   const [userShoppingCart, setUserShoppingCart] = useState([]);
+  const [inCart, setInCart] = useState(false);
 
   const modalToggle = () => {
     setIsCartDialogOpen((prevIsCartDialogOpen) => !prevIsCartDialogOpen);
@@ -19,7 +20,7 @@ function App() {
     modalToggle();
   };
 
-  const onAdd = (product) => {
+  const onAdd = (product, inCart) => {
     const exist = userShoppingCart.find((item) => item.id === product.id);
     if (exist) {
       const newUserShoppingCart = userShoppingCart.map((item) =>
@@ -30,7 +31,7 @@ function App() {
       const newUserShoppingCart = [...userShoppingCart, { ...product, qty: 1 }];
       setUserShoppingCart(newUserShoppingCart);
     }
-    setIsCartDialogOpen(true);
+    !inCart && setIsCartDialogOpen(true);
   };
 
   const onRemove = (product) => {
@@ -61,7 +62,17 @@ function App() {
               />
             }
           >
-            <Route index element={<Home onAdd={onAdd} products={products} />} />
+            <Route
+              index
+              element={
+                <Home
+                  onAdd={onAdd}
+                  products={products}
+                  inCart={inCart}
+                  setInCart={setInCart}
+                />
+              }
+            />
             <Route
               path="/Cart"
               element={
@@ -69,6 +80,8 @@ function App() {
                   cart={userShoppingCart}
                   onAdd={onAdd}
                   onRemove={onRemove}
+                  inCart={inCart}
+                  setInCart={setInCart}
                 />
               }
             />

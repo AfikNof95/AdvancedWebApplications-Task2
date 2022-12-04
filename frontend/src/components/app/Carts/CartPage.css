@@ -1,13 +1,21 @@
 #cart-page-layout {
-  height: 88vh;
+  /* height: 88vh; */
+
+  padding-bottom: 15px;
 }
 
 #cart-sum-continer {
-  border: 2px solid red;
+  border: 1px solid rgb(119, 128, 155);
+  border-radius: 8px;
+  padding-top: 5px;
+  margin-bottom: 10px;
 }
 
 #person-continer {
-border: 2px solid blue;
+  border: 1px solid rgb(119, 128, 155);
+  border-radius: 8px;
+  padding-top: 7px;
+  padding-bottom: 8px;
 }
 
 .cart-card {
@@ -16,11 +24,11 @@ border: 2px solid blue;
 }
 
 .img-container {
-    overflow: hidden;
-    max-height: 175px;
+  overflow: hidden;
+  max-height: 175px;
 }
 
 .qty-wrapper {
-    border: 1px solid grey;
-    border-radius: 7px;
+  border: 1px solid grey;
+  border-radius: 7px;
 }
