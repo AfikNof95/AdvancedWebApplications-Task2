@@ -5,7 +5,8 @@ import Row from "react-bootstrap/Row";
 import Product from "../product/Product";
 
 function Home(props) {
-  const { products, onAdd } = props;
+  const { products, onAdd, setInCart, inCart } = props;
+  setInCart(false);
 
   return (
     <div id="home-layout">
