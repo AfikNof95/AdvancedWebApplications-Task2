@@ -25,8 +25,9 @@ function AppLayout(props) {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
+            <div className="navbar-nav mr-auto">
               <Link className="nav-link active" aria-current="page" to={"/"}>
                 Home
               </Link>
