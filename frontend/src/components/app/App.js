@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./NavbarAndLayout/AppLayout";
 import Home from "./Home/Home";
 import CartPage from "./Carts/CartPage";
-import SideCart from "./Carts/UserCart";
+import SideCart from "./Carts/SideCart";
 import { products } from "../../tmpProducts";
 import "./App.css";
 
@@ -17,36 +17,36 @@ function App() {
   };
 
   const closeDialog = () => {
-    modalToggle();
+    setIsCartDialogOpen(false);
   };
 
   const onAdd = (product, inCart) => {
-    const exist = userShoppingCart.find((item) => item.id === product.id);
-    if (exist) {
-      const newUserShoppingCart = userShoppingCart.map((item) =>
-        item.id === product.id ? { ...exist, qty: exist.qty + 1 } : item
-      );
-      setUserShoppingCart(newUserShoppingCart);
-    } else {
-      const newUserShoppingCart = [...userShoppingCart, { ...product, qty: 1 }];
-      setUserShoppingCart(newUserShoppingCart);
-    }
-    !inCart && setIsCartDialogOpen(true);
+    setUserShoppingCart((prevState) => {
+      const foundProduct = prevState.find((item) => item.id === product.id);
+      !inCart && setIsCartDialogOpen(true);
+
+      return !!foundProduct
+        ? prevState.map((item) =>
+            item.id === product.id
+              ? { ...foundProduct, qty: foundProduct.qty + 1 }
+              : item
+          )
+        : [...prevState, { ...product, qty: 1 }];
+    });
   };
 
   const onRemove = (product) => {
-    const exist = userShoppingCart.find((item) => item.id === product.id);
-    if (exist.qty === 1) {
-      const newUserShoppingCart = userShoppingCart.filter(
-        (item) => item.id !== product.id
-      );
-      setUserShoppingCart(newUserShoppingCart);
-    } else {
-      const newUserShoppingCart = userShoppingCart.map((item) =>
-        item.id === product.id ? { ...exist, qty: exist.qty - 1 } : item
-      );
-      setUserShoppingCart(newUserShoppingCart);
-    }
+    setUserShoppingCart((prevState) => {
+      const foundProduct = prevState.find((item) => item.id === product.id);
+
+      return foundProduct.qty > 1
+        ? prevState.map((item) =>
+            item.id === product.id
+              ? { ...foundProduct, qty: foundProduct.qty - 1 }
+              : item
+          )
+        : prevState.filter((item) => item.id !== product.id);
+    });
   };
 
   return (
@@ -87,15 +87,15 @@ function App() {
             />
           </Route>
         </Routes>
+        {isCartDialogOpen && (
+          <SideCart
+            cart={userShoppingCart}
+            onClose={closeDialog}
+            onAdd={onAdd}
+            onRemove={onRemove}
+          />
+        )}
       </BrowserRouter>
-      {isCartDialogOpen && (
-        <SideCart
-          cart={userShoppingCart}
-          onClose={closeDialog}
-          onAdd={onAdd}
-          onRemove={onRemove}
-        />
-      )}
     </div>
   );
 }

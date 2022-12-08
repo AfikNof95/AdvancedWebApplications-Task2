@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import "./SideCart.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 function SideCart(props) {
   const { cart, onClose, onAdd, onRemove } = props;
@@ -73,13 +74,14 @@ function SideCart(props) {
             )}
           </div>
           <div className="row">
-            <button
-              type="button"
-              className="btn btn-info"
-              onClick={() => alert("Check")}
-            >
-              Checkout
-            </button>
+            <Link to="/Cart">
+              <button
+                type="button"
+                className="btn btn-info"
+              >
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </Container>
