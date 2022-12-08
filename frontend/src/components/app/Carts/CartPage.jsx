@@ -64,7 +64,7 @@ function CartPage(props) {
         <hr />
         <form>
           <div className="row mb-3">
-            <label for="first-name-input" class="col form-label">
+            <label htmlFor="first-name-input" className="col form-label">
               First Name
             </label>
             <input
@@ -72,7 +72,7 @@ function CartPage(props) {
               className="col form-control"
               id="first-name-input"
             />
-            <label for="last-name-input" className="col form-label">
+            <label htmlFor="last-name-input" className="col form-label">
               Last Name
             </label>
             <input
@@ -83,11 +83,11 @@ function CartPage(props) {
           </div>
 
           <div className="row mb-3">
-            <label for="email-input" className="col form-label">
+            <label htmlFor="email-input" className="col form-label">
               Email address
             </label>
             <input type="email" className="col form-control" id="email-input" />
-            <label for="phone-input" className="col form-label">
+            <label htmlFor="phone-input" className="col form-label">
               Phone number
             </label>
             <input
@@ -98,21 +98,21 @@ function CartPage(props) {
           </div>
 
           <div className="row mb-3">
-            <label for="city-input" className="col form-label">
+            <label htmlFor="city-input" className="col form-label">
               City / Town
             </label>
             <input type="text" className="col form-control" id="city-input" />
-            <label for="zip-input" className="col form-label">
+            <label htmlFor="zip-input" className="col form-label">
               Zip Code
             </label>
             <input type="number" className="col form-control" id="zip-input" />
           </div>
           <div className="row mb-3">
-            <label for="street-input" className="col form-label">
+            <label htmlFor="street-input" className="col form-label">
               Street
             </label>
             <input type="text" className="col form-control" id="street-input" />
-            <label for="house-number-input" className="col form-label">
+            <label htmlFor="house-number-input" className="col form-label">
               House Number
             </label>
             <input
@@ -122,7 +122,7 @@ function CartPage(props) {
             />
           </div>
           <div className="row mb-3">
-            <label for="country-input" className="col form-label">
+            <label htmlFor="country-input" className="col form-label">
               Country
             </label>
             <input
@@ -131,7 +131,7 @@ function CartPage(props) {
               id="country-input"
             />
             <div className="col"></div>
-            <button type="submit" class="col btn btn-primary">
+            <button type="submit" className="col btn btn-primary">
               Submit
             </button>
           </div>
