@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./NavbarAndLayout/AppLayout";
 import Home from "./Home/Home";
 import CartPage from "./Carts/CartPage";
-import SideCart from "./Carts/SideCart";
+// import SideCart from "./Carts/SideCart";
 import { products } from "../../tmpProducts";
 import "./App.css";
 
@@ -59,6 +59,11 @@ function App() {
               <AppLayout
                 shoppingQty={userShoppingCart.length}
                 onCartClick={modalToggle}
+                isCartDialogOpen={isCartDialogOpen}
+                cart={userShoppingCart}
+                onClose={closeDialog}
+                onAddProduct={onAddProduct}
+                onRemoveProduct={onRemoveProduct}
               />
             }
           >
@@ -88,14 +93,14 @@ function App() {
             />
           </Route>
         </Routes>
-        {isCartDialogOpen && (
+        {/* {isCartDialogOpen && (
           <SideCart
             cart={userShoppingCart}
             onClose={closeDialog}
             onAddProduct={onAddProduct}
             onRemoveProduct={onRemoveProduct}
           />
-        )}
+        )} */}
       </BrowserRouter>
     </div>
   );
