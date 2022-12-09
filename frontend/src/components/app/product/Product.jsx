@@ -1,11 +1,12 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import "./product.css";
 
 function Product(props) {
   const { product, onAddProduct } = props;
 
-const addProductHandler = () => onAddProduct(product);
+  const addProductHandler = () => onAddProduct(product);
 
   return (
     <Card className="card-container" style={{ width: "15rem" }}>
@@ -17,11 +18,15 @@ const addProductHandler = () => onAddProduct(product);
       />
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>
-        <Card.Text>{product.description}</Card.Text>
-        <Card.Text>price ${product.price}</Card.Text>
-        <Button variant="primary" onClick={addProductHandler}>
-          Add to cart
-        </Button>
+        <Card.Text style={{ overflow: "auto", maxHeight: "96px" }}>
+          {product.description}
+        </Card.Text>
+        <div id="price-add-wrapper">
+          <Card.Text>price ${product.price}</Card.Text>
+          <Button variant="primary" onClick={addProductHandler}>
+            Add to cart
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
