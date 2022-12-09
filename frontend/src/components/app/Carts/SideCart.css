@@ -1,14 +1,14 @@
 #user-cart {
-  position: absolute;
+  position: fixed;
   right: 0;
-  top: 48px;
-  width: 250px;
-  height: 420px;
+  width: 300px;
+  height: 456px;
   display: flex;
   justify-content: center;
   border: 1px solid #3e546d;
   border-radius: 5px;
   background-color: #8ec8ec;
+  z-index: 500;
 }
 
 #close-cart {
@@ -23,23 +23,23 @@
   font-weight: 600;
 }
 
-#wrapper {
-    overflow: auto;
-    max-height: 280px;
+#products-body {
+  height: 300px;
+  width: 245px;
+  padding-left: 8px;
+  overflow-y: auto;
 }
 
-.row {
+#hr-prod-between-sum {
+  margin-top: 16px;
+}
+
+.side-cart-row {
+  padding: 3px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.col-1 {
-  flex-basis: 100%;
-}
-
-.col-2 {
-  flex-basis: 100%;
+  align-items: center;
 }
 
 .block {
@@ -47,6 +47,37 @@
   margin: 0.5rem;
 }
 
+.add-remove-btns {
+  font-weight: 600;
+  height: 25px;
+  width: 34px;
+}
+
+.btns-price-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .text-right {
   text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.items-title-in-row {
+  text-align: left;
+}
+
+.btn-info {
+  max-width: 150px;
+}
+
+.bottom-section {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 15px;
+  width: 248px;
 }

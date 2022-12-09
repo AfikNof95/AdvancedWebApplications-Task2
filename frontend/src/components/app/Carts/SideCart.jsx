@@ -27,53 +27,56 @@ function SideCart(props) {
         <button id="close-cart" onClick={onClose}>
           X{" "}
         </button>
-        <hr />
-        <div className="row">
-          <div className="row" id="wrapper">
+        <hr style={{ width: "244px" }} />
+        <div className="col" id="products-body">
+          <div className="row">
             {cart.map((item) => (
-              <div key={item.id} className="row">
-                <div className="col">{item.title}</div>
-                <div className="col">
+              <div key={item.id} className="row side-cart-row">
+                <div className="col-4 items-title-in-row">{item.title}</div>
+                <div className="col-8 btns-price-section">
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-success add-remove-btns"
+                    style={{ padding: 0 }}
                     onClick={() => onAddProduct(item)}
                   >
                     +
                   </button>
+                  <span>{item.qty}</span>
                   <button
                     type="button"
-                    className="btn btn-danger"
+                    className="btn btn-danger add-remove-btns"
+                    style={{ padding: 0 }}
                     onClick={() => onRemoveProduct(item)}
                   >
                     -
                   </button>
-                </div>
-                <div className="col-1 text-right">
-                  {item.qty} X ${item.price.toFixed(2)}
+                  <span className="text-right">
+                    ${(item.qty * item.price).toFixed(2)}
+                  </span>
                 </div>
               </div>
             ))}
+            <hr id="hr-prod-between-sum"/>
             {cart.length !== 0 && (
               <>
-                <hr />
-                <div className="row">
-                  <span className="col-2">Items Price</span>
-                  <span className="col-1 text-right">
+                <div className="row side-cart-row">
+                  <span className="col text-left">Items Price</span>
+                  <span className="col text-right">
                     ${cartPrice.toFixed(2)}
                   </span>
                 </div>
-                <div className="row">
-                  <span className="col-2">Tax Price</span>
-                  <span className="col-1 text-right">
+                <div className="row side-cart-row">
+                  <span className="col text-left">Tax Price</span>
+                  <span className="col text-right">
                     ${israelTax.toFixed(2)}
                   </span>
                 </div>
-                <div className="row">
-                  <span className="col-2">
+                <div className="row side-cart-row">
+                  <span className="col text-left">
                     <strong>Total price</strong>
                   </span>
-                  <span className="col-1 text-right">
+                  <span className="col text-right">
                     <strong>${cartSumPrice.toFixed(2)}</strong>
                   </span>
                 </div>
@@ -81,19 +84,19 @@ function SideCart(props) {
               </>
             )}
           </div>
-          <div className="row">
-            {checkoutBtnDisabled ? (
-              <button type="button" className="btn btn-info" disabled>
+        </div>
+        <div className="bottom-section">
+          {checkoutBtnDisabled ? (
+            <button type="button" className="btn btn-info" disabled>
+              Checkout
+            </button>
+          ) : (
+            <Link to={"/Cart"}>
+              <button type="button" className="btn btn-info">
                 Checkout
               </button>
-            ) : (
-              <Link to={"/Cart"}>
-                <button type="button" className="btn btn-info">
-                  Checkout
-                </button>
-              </Link>
-            )}
-          </div>
+            </Link>
+          )}
         </div>
       </Container>
     </aside>

@@ -1,4 +1,5 @@
 import React from "react";
+import SideCart from "../Carts/SideCart";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
@@ -6,8 +7,16 @@ import "./AppLayout.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function AppLayout(props) {
-  const { shoppingQty, onCartClick } = props;
-  
+  const {
+    shoppingQty,
+    onCartClick,
+    isCartDialogOpen,
+    cart,
+    onClose,
+    onAddProduct,
+    onRemoveProduct,
+  } = props;
+
   return (
     <>
       <nav className="navbar navbar-expand-lg sticky-top Navbar-wrapper">
@@ -45,6 +54,15 @@ function AppLayout(props) {
           </div>
         </div>
       </nav>
+      {isCartDialogOpen && (
+        <SideCart
+          cart={cart}
+          onClose={onClose}
+          onAddProduct={onAddProduct}
+          onRemoveProduct={onRemoveProduct}
+        />
+      )}
+
       <Outlet />
     </>
   );
