@@ -9,8 +9,8 @@ import "./App.css";
 
 function App() {
   const [isCartDialogOpen, setIsCartDialogOpen] = useState(false);
+  const [isInCartPage, setIsInCartPage] = useState(false);
   const [userShoppingCart, setUserShoppingCart] = useState([]);
-  const [inCart, setInCart] = useState(false);
 
   const modalToggle = () => {
     setIsCartDialogOpen((prevIsCartDialogOpen) => !prevIsCartDialogOpen);
@@ -20,10 +20,10 @@ function App() {
     setIsCartDialogOpen(false);
   };
 
-  const onAdd = (product, inCart) => {
+  const onAddProduct = (product, isInCartPage) => {
     setUserShoppingCart((prevState) => {
       const foundProduct = prevState.find((item) => item.id === product.id);
-      !inCart && setIsCartDialogOpen(true);
+      !isInCartPage && setIsCartDialogOpen(true);
 
       return !!foundProduct
         ? prevState.map((item) =>
@@ -35,7 +35,7 @@ function App() {
     });
   };
 
-  const onRemove = (product) => {
+  const onRemoveProduct = (product) => {
     setUserShoppingCart((prevState) => {
       const foundProduct = prevState.find((item) => item.id === product.id);
 
@@ -66,10 +66,10 @@ function App() {
               index
               element={
                 <Home
-                  onAdd={onAdd}
+                  onAddProduct={onAddProduct}
                   products={products}
-                  inCart={inCart}
-                  setInCart={setInCart}
+                  isInCartPage={isInCartPage}
+                  setIsInCartPage={setIsInCartPage}
                 />
               }
             />
@@ -78,10 +78,11 @@ function App() {
               element={
                 <CartPage
                   cart={userShoppingCart}
-                  onAdd={onAdd}
-                  onRemove={onRemove}
-                  inCart={inCart}
-                  setInCart={setInCart}
+                  onAddProduct={onAddProduct}
+                  onRemoveProduct={onRemoveProduct}
+                  isInCartPage={isInCartPage}
+                  setIsInCartPage={setIsInCartPage}
+                  setUserShoppingCart={setUserShoppingCart}
                 />
               }
             />
@@ -91,8 +92,8 @@ function App() {
           <SideCart
             cart={userShoppingCart}
             onClose={closeDialog}
-            onAdd={onAdd}
-            onRemove={onRemove}
+            onAddProduct={onAddProduct}
+            onRemoveProduct={onRemoveProduct}
           />
         )}
       </BrowserRouter>
