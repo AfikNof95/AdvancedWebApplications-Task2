@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import "./SideCart.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function SideCart(props) {
-  const { cart, onClose, onAdd, onRemove } = props;
+  const { cart, onClose, onAddProduct, onRemoveProduct } = props;
+  const [checkoutBtnDisabled, setCheckoutBtnDisabled] = useState(true);
   const cartPrice = cart.reduce((a, c) => a + c.qty * c.price, 0);
   const israelTax = cartPrice * 0.17;
   const cartSumPrice = cartPrice + israelTax;
+
+  useEffect(() => {
+    cart.length === 0
+      ? setCheckoutBtnDisabled(true)
+      : setCheckoutBtnDisabled(false);
+  }, [cart]);
 
   return (
     <aside className="block col-1" id="user-cart">
@@ -29,14 +37,14 @@ function SideCart(props) {
                   <button
                     type="button"
                     className="btn btn-success"
-                    onClick={() => onAdd(item)}
+                    onClick={() => onAddProduct(item)}
                   >
                     +
                   </button>
                   <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => onRemove(item)}
+                    onClick={() => onRemoveProduct(item)}
                   >
                     -
                   </button>
@@ -74,14 +82,17 @@ function SideCart(props) {
             )}
           </div>
           <div className="row">
-            <Link to="/Cart">
-              <button
-                type="button"
-                className="btn btn-info"
-              >
+            {checkoutBtnDisabled ? (
+              <button type="button" className="btn btn-info" disabled>
                 Checkout
               </button>
-            </Link>
+            ) : (
+              <Link to={"/Cart"}>
+                <button type="button" className="btn btn-info">
+                  Checkout
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </Container>
