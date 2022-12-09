@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function AppLayout(props) {
   const { shoppingQty, onCartClick } = props;
+  
   return (
     <>
       <nav className="navbar navbar-expand-lg sticky-top Navbar-wrapper">

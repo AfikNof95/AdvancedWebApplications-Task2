@@ -3,7 +3,9 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function Product(props) {
-  const { product, onAdd } = props;
+  const { product, onAddProduct } = props;
+
+const addProductHandler = () => onAddProduct(product);
 
   return (
     <Card className="card-container" style={{ width: "15rem" }}>
@@ -17,7 +19,7 @@ function Product(props) {
         <Card.Title>{product.title}</Card.Title>
         <Card.Text>{product.description}</Card.Text>
         <Card.Text>price ${product.price}</Card.Text>
-        <Button variant="primary" onClick={() => onAdd(product)}>
+        <Button variant="primary" onClick={addProductHandler}>
           Add to cart
         </Button>
       </Card.Body>
