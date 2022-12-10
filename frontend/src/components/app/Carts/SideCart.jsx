@@ -57,9 +57,9 @@ function SideCart(props) {
                 </div>
               </div>
             ))}
-            <hr id="hr-prod-between-sum"/>
             {cart.length !== 0 && (
               <>
+                <hr id="hr-prod-between-sum" />
                 <div className="row side-cart-row">
                   <span className="col text-left">Items Price</span>
                   <span className="col text-right">
