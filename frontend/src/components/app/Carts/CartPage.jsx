@@ -50,39 +50,48 @@ function CartPage(props) {
         <div id="cart-sum-continer" className="container">
           {cart.map((item, index) => (
             <div className="row card-container" key={index}>
-              <div className="card mb-3 cart-card">
+              <div className="card mb-3 cart-card" style={{ paddingLeft: 0 }}>
                 <div className="row align-items-center g-0">
-                  <div className="col-3 img-container">
+                  <div className="col-2 img-container">
                     <img
                       src={`${item.firstPhotoUrl}`}
                       className="img-fluid rounded-start"
                       alt={`${item.title}`}
+                      style={{ width: "100%" }}
                     />
                   </div>
-                  <div className="col-6 d-flex flex-column">
+                  <div className="col-7 d-flex flex-column body-container">
                     <div className="card-body">
                       <span>
-                        <h5 className="card-title d-flex justify-content-start">
-                          {item.title}
-                        </h5>
+                        <h5 className="card-title text-left">{item.title}</h5>
                       </span>
-                      <div className="row">
-                        <button
-                          type="button"
-                          className="col btn btn-success me-2"
-                          onClick={() => onAddProduct(item, isInCartPage)}
-                        >
-                          +
-                        </button>
-                        <div className="col qty-wrapper me-2">{item.qty}</div>
-                        <button
-                          type="button"
-                          className="col btn btn-danger"
-                          onClick={() => onRemoveProduct(item)}
-                        >
-                          -
-                        </button>
+                      <div className="text-left description-wrapper">
+                        {item.description}
                       </div>
+                      <span className="row buttons-section">
+                        <div className="col">
+                          <div className="row">
+                            <button
+                              type="button"
+                              className="col btn btn-success add-remove-btns"
+                              onClick={() => onAddProduct(item, isInCartPage)}
+                            >
+                              +
+                            </button>
+                            <div className="col qty-wrapper ps-2 me-2 ms-2">
+                              {item.qty}
+                            </div>
+                            <button
+                              type="button"
+                              className="col btn btn-danger add-remove-btns"
+                              onClick={() => onRemoveProduct(item)}
+                            >
+                              -
+                            </button>
+                          </div>
+                        </div>
+                        <div className="col"></div>
+                      </span>
                     </div>
                   </div>
                   <div className="col-3">
@@ -102,31 +111,34 @@ function CartPage(props) {
           </h5>
           <hr />
           <div className="row">
-            <span className="col">Items Price</span>
-            <span className="col">${cartPrice.toFixed(2)}</span>
+            <div className="col">
+              <div className="right-border">Items Price</div>
+              <div className="right-border">Tax Price</div>
+              <div className="right-border">
+                <strong>Total price</strong>
+              </div>
+            </div>
+            <div className="col">
+              <div className="right-border">${cartPrice.toFixed(2)}</div>
+              <div className="right-border">${israelTax.toFixed(2)}</div>
+              <div className="right-border">
+                {" "}
+                <strong>${cartSumPrice.toFixed(2)}</strong>
+              </div>
+            </div>
+            <div className="col delete-cart-col">
+              <Link to={"/"}>
+                <button
+                  id="delte-all-cart-btn"
+                  type="button"
+                  className="btn btn-outline-danger"
+                  onClick={deleteCart}
+                >
+                  Delete Cart
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="row">
-            <span className="col">Tax Price</span>
-            <span className="col">${israelTax.toFixed(2)}</span>
-          </div>
-          <div className="row">
-            <span className="col">
-              <strong>Total price</strong>
-            </span>
-            <span className="col">
-              <strong>${cartSumPrice.toFixed(2)}</strong>
-            </span>
-          </div>
-          <Link to={"/"}>
-            <button
-              id="delte-all-cart-btn"
-              type="button"
-              className="btn btn-outline-danger"
-              onClick={deleteCart}
-            >
-              Delete All Cart
-            </button>
-          </Link>
         </div>
       )}
       <div id="person-continer" className="container">
