@@ -34,6 +34,13 @@
 .qty-wrapper {
   border: 1px solid grey;
   border-radius: 7px;
+  text-align: center;
+}
+
+.add-remove-btns {
+  font-weight: 600;
+  --bs-btn-padding-x: 0;
+  --bs-btn-padding-y: 0;
 }
 
 .text-right {
@@ -42,4 +49,28 @@
 
 .text-left {
   text-align: left;
+}
+
+.body-container {
+  padding-left: 12px;
+  min-height: 90%;
+}
+
+.description-wrapper {
+  margin-bottom: 16px;
+}
+
+.buttons-section {
+  margin: 2px 0 0 3px;
+  min-height: 24px;
+}
+
+.right-border {
+  border-right: 1px dashed rgb(42, 40, 40);
+}
+
+.delete-cart-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
