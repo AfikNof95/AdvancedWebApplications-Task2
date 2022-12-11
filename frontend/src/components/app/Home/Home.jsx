@@ -6,10 +6,10 @@ import Product from "../product/Product";
 
 function Home(props) {
   const { products, onAddProduct, setIsInCartPage } = props;
-  
+
   useEffect(() => {
     setIsInCartPage(false);
-  },[]);
+  }, []);
 
   return (
     <div id="home-layout">
@@ -18,7 +18,7 @@ function Home(props) {
           {products.map((product, index) => (
             <Product
               product={product}
-              key={index}
+              key={product._id}
               onAddProduct={onAddProduct}
             />
           ))}

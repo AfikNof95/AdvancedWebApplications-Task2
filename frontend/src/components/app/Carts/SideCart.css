@@ -2,13 +2,15 @@
   position: fixed;
   right: 0;
   width: 300px;
-  height: 456px;
+  height: auto;
+  max-height: 80vh;
   display: flex;
   justify-content: center;
   border: 1px solid #3e546d;
   border-radius: 5px;
   background-color: #8ec8ec;
   z-index: 500;
+  overflow: auto;
 }
 
 #close-cart {
@@ -24,10 +26,7 @@
 }
 
 #products-body {
-  height: 300px;
-  width: 245px;
-  padding-left: 8px;
-  overflow-y: auto;
+  padding: 15px;
 }
 
 #hr-prod-between-sum {
@@ -76,7 +75,7 @@
 }
 
 .bottom-section {
-  position: absolute;
+  margin: auto;
   bottom: 0;
   margin-bottom: 15px;
   width: 248px;

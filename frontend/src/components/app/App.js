@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./NavbarAndLayout/AppLayout";
 import Home from "./Home/Home";
 import CartPage from "./Carts/CartPage";
-// import SideCart from "./Carts/SideCart";
-import { products } from "../../tmpProducts";
+import axios from "axios";
 import "./App.css";
 
 function App() {
   const [isCartDialogOpen, setIsCartDialogOpen] = useState(false);
   const [isInCartPage, setIsInCartPage] = useState(false);
   const [userShoppingCart, setUserShoppingCart] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await axios({
+        method: "GET",
+        url: "http://localhost:2308/Product/GetAll",
+      });
+      setProducts(products.data.data);
+    };
+    fetchProducts();
+  }, []);
 
   const modalToggle = () => {
     setIsCartDialogOpen((prevIsCartDialogOpen) => !prevIsCartDialogOpen);
@@ -22,12 +33,12 @@ function App() {
 
   const onAddProduct = (product, isInCartPage) => {
     setUserShoppingCart((prevState) => {
-      const foundProduct = prevState.find((item) => item.id === product.id);
+      const foundProduct = prevState.find((item) => item._id === product._id);
       !isInCartPage && setIsCartDialogOpen(true);
 
       return !!foundProduct
         ? prevState.map((item) =>
-            item.id === product.id
+            item._id === product._id
               ? { ...foundProduct, qty: foundProduct.qty + 1 }
               : item
           )
@@ -37,15 +48,15 @@ function App() {
 
   const onRemoveProduct = (product) => {
     setUserShoppingCart((prevState) => {
-      const foundProduct = prevState.find((item) => item.id === product.id);
+      const foundProduct = prevState.find((item) => item._id === product._id);
 
       return foundProduct.qty > 1
         ? prevState.map((item) =>
-            item.id === product.id
+            item._id === product._id
               ? { ...foundProduct, qty: foundProduct.qty - 1 }
               : item
           )
-        : prevState.filter((item) => item.id !== product.id);
+        : prevState.filter((item) => item._id !== product._id);
     });
   };
 

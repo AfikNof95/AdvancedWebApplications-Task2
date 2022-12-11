@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require("cors");
 require("dotenv").config();
 
 try {
@@ -15,10 +16,11 @@ try {
   console.log(ex.stack);
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2308;
 
 app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(express.json());
+app.use(cors());
 app.use("/", require("./routes/index"));
 
 app.listen(PORT, () => {
