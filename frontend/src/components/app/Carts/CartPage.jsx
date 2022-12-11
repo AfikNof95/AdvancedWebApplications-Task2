@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./CartPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,9 +16,26 @@ function CartPage(props) {
   const cartPrice = cart.reduce((a, c) => a + c.qty * c.price, 0);
   const israelTax = cartPrice * 0.17;
   const cartSumPrice = cartPrice + israelTax;
+  const isCartEmpty = cart.length === 0;
+
+  const [contactInfo, setContactInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    city: "",
+    zip: "",
+    street: "",
+    houseNumber: "",
+    country: "",
+  });
 
   const deleteCart = () => {
     setUserShoppingCart([]);
+  };
+
+  const handleFormChange = (event) => {
+    setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
   };
 
   useEffect(() => {
@@ -26,7 +44,11 @@ function CartPage(props) {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("Clicked submit");
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/Order",
+      data: contactInfo,
+    });
     /* Next will send an object of the details
     first-name-input
     last-name-input
@@ -150,55 +172,87 @@ function CartPage(props) {
               First Name
             </label>
             <input
+              onChange={handleFormChange}
               type="text"
               className="col form-control"
               id="first-name-input"
+              name="firstName"
             />
             <label htmlFor="last-name-input" className="col form-label">
               Last Name
             </label>
             <input
+              onChange={handleFormChange}
               type="text"
               className="col form-control"
               id="last-name-input"
+              name="lastName"
             />
           </div>
           <div className="row mb-3">
             <label htmlFor="email-input" className="col form-label">
               Email address
             </label>
-            <input type="email" className="col form-control" id="email-input" />
+            <input
+              onChange={handleFormChange}
+              type="email"
+              className="col form-control"
+              id="email-input"
+              name="email"
+            />
             <label htmlFor="phone-input" className="col form-label">
               Phone number
             </label>
             <input
+              onChange={handleFormChange}
               type="number"
               className="col form-control"
               id="phone-input"
+              name="phone"
             />
           </div>
           <div className="row mb-3">
             <label htmlFor="city-input" className="col form-label">
               City / Town
             </label>
-            <input type="text" className="col form-control" id="city-input" />
+            <input
+              onChange={handleFormChange}
+              type="text"
+              className="col form-control"
+              id="city-input"
+              name="city"
+            />
             <label htmlFor="zip-input" className="col form-label">
               Zip Code
             </label>
-            <input type="number" className="col form-control" id="zip-input" />
+            <input
+              onChange={handleFormChange}
+              type="number"
+              className="col form-control"
+              id="zip-input"
+              name="zip"
+            />
           </div>
           <div className="row mb-3">
             <label htmlFor="street-input" className="col form-label">
               Street
             </label>
-            <input type="text" className="col form-control" id="street-input" />
+            <input
+              onChange={handleFormChange}
+              type="text"
+              className="col form-control"
+              id="street-input"
+              name="street"
+            />
             <label htmlFor="house-number-input" className="col form-label">
               House Number
             </label>
             <input
+              onChange={handleFormChange}
               type="number"
               className="col form-control"
               id="house-number-input"
+              name="houseNumber"
             />
           </div>
           <div className="row mb-3">
@@ -206,12 +260,18 @@ function CartPage(props) {
               Country
             </label>
             <input
+              onChange={handleFormChange}
               type="text"
               className="col form-control"
               id="country-input"
+              name="country"
             />
             <div className="col"></div>
-            <button type="submit" className="col btn btn-primary" on>
+            <button
+              type="submit"
+              className="col btn btn-primary"
+              disabled={isCartEmpty}
+            >
               Submit
             </button>
           </div>
