@@ -31,8 +31,8 @@ function SideCart(props) {
         <div className="col" id="products-body">
           <div className="row">
             {cart.map((item) => (
-              <div key={item.id} className="row side-cart-row">
-                <div className="col-4 items-title-in-row">{item.title}</div>
+              <div key={item._id} className="row side-cart-row">
+                <div className="col-4 items-title-in-row">{item.name}</div>
                 <div className="col-8 btns-price-section">
                   <button
                     type="button"
