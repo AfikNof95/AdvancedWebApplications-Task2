@@ -29,7 +29,7 @@ function SideCart(props) {
         </button>
         <hr style={{ width: "244px" }} />
         <div className="col" id="products-body">
-          <div className="row">
+          <div className="row prod-wrapper">
             {cart.map((item) => (
               <div key={item._id} className="row side-cart-row">
                 <div className="col-4 items-title-in-row">{item.name}</div>

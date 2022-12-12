@@ -19,37 +19,23 @@ function AppLayout(props) {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg sticky-top Navbar-wrapper">
-        <div className="container-fluid ms-3">
-          <Link className="navbar-brand" to={"/"}>
-            Afik-Omer Store
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav mr-auto">
-              <Link className="nav-link active" aria-current="page" to={"/"}>
-                Home
-              </Link>
-              <Link className="nav-link" to={"/Cart"}>
-                Cart-Checkout
-              </Link>
-            </div>
-            <div className="position-absolute end-0 me-3">
-              <div id="shopping-cart-wrapper" onClick={onCartClick}>
-                <BsCart3 size={23} />
-                {shoppingQty > 0 && <span id="qty-number"> {shoppingQty}</span>}
-              </div>
+      <nav className="navbar sticky-top Navbar-wrapper">
+        <div className="container ms-3">
+          <div className="d-flex justify-content-start align-items-baseline">
+            <Link className="navbar-brand" to={"/"}>
+              Afik-Omer Store
+            </Link>
+            <Link className="nav-link active ms-4" aria-current="page" to={"/"}>
+              Home
+            </Link>
+            <Link className="nav-link ms-4" to={"/Cart"}>
+              Cart-Checkout
+            </Link>
+          </div>
+          <div className="position-absolute end-0 me-3">
+            <div id="shopping-cart-wrapper" onClick={onCartClick}>
+              <BsCart3 size={23} />
+              {shoppingQty > 0 && <span id="qty-number"> {shoppingQty}</span>}
             </div>
           </div>
         </div>

@@ -104,14 +104,6 @@ function App() {
             />
           </Route>
         </Routes>
-        {/* {isCartDialogOpen && (
-          <SideCart
-            cart={userShoppingCart}
-            onClose={closeDialog}
-            onAddProduct={onAddProduct}
-            onRemoveProduct={onRemoveProduct}
-          />
-        )} */}
       </BrowserRouter>
     </div>
   );

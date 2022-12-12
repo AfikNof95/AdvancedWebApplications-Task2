@@ -1,3 +1,4 @@
+// For the use before there were the server and mongoose
 export const products = [
   {
     title: "Bannanas",
