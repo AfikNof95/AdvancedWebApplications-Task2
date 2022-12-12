@@ -15,6 +15,7 @@ function Product(props) {
         src={`${product.firstPhotoUrl}`}
         alt={`${product.name}`}
         height="200px"
+        className="card-image"
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.name}</Card.Title>

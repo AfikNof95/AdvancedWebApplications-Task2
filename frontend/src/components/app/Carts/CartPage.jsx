@@ -13,7 +13,7 @@ function CartPage(props) {
     setIsInCartPage,
     setUserShoppingCart,
   } = props;
-  console.log(cart);
+
   const cartPrice = cart.reduce((a, c) => a + c.qty * c.price, 0);
   const israelTax = cartPrice * 0.17;
   const cartSumPrice = cartPrice + israelTax;
@@ -57,11 +57,17 @@ function CartPage(props) {
     const products = cart.map((product) => {
       return { count: product.qty, product: product.id };
     });
-    axios({
-      method: "POST",
-      url: "http://localhost:2308/Order/Add",
-      data: { ...contactInfo, products },
-    });
+    try {
+      axios({
+        method: "POST",
+        url: "http://localhost:2308/Order/Add",
+        data: { ...contactInfo, products },
+      });
+      alert("Your information submited successfully!");
+    } catch (err) {
+      console.log("There was an error sending the information");
+      console.log(err);
+    }
   };
 
   return (
@@ -243,36 +249,6 @@ function CartPage(props) {
             </div>
 
             <div className="col-6">
-              <label htmlFor="city-input" className="form-label">
-                City / Town
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="city-input"
-                name="city"
-              />
-            </div>
-          </div>
-
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="zip-input" className="form-label">
-                Zip Code
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="number"
-                className="form-control"
-                id="zip-input"
-                name="zip"
-              />
-            </div>
-
-            <div className="col-6">
               <label htmlFor="street-input" className="form-label">
                 Street
               </label>
@@ -286,7 +262,6 @@ function CartPage(props) {
               />
             </div>
           </div>
-
           <div className="row mb-3">
             <div className="col-6">
               <label htmlFor="house-number-input" className="form-label">
@@ -302,6 +277,22 @@ function CartPage(props) {
               />
             </div>
 
+            <div className="col-6">
+              <label htmlFor="zip-input" className="form-label">
+                Zip Code
+              </label>
+              <input
+                required
+                onChange={handleFormChange}
+                type="number"
+                className="form-control"
+                id="zip-input"
+                name="zip"
+              />
+            </div>
+          </div>
+
+          <div className="row mb-3">
             <div className="col-6">
               <label htmlFor="country-input" className="form-label">
                 Country
