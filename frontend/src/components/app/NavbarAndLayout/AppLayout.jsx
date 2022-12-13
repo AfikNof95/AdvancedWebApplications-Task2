@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SideCart from "../Carts/SideCart";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import "./AppLayout.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function AppLayout(props) {
   const {
-    shoppingQty,
     onCartClick,
     isCartDialogOpen,
     cart,
@@ -17,26 +15,54 @@ function AppLayout(props) {
     onRemoveProduct,
   } = props;
 
+  const [shoppingQty, setShoppingQty] = useState(() => {
+    let count = 0;
+    for (let product of Object.values(cart)) {
+      count += product.qty;
+    }
+    return count;
+  });
+
+  useEffect(() => {
+    let count = 0;
+    for (let product of Object.values(cart)) {
+      count += product.qty;
+    }
+    setShoppingQty(count);
+  }, [cart]);
   return (
     <>
-      <nav className="navbar sticky-top Navbar-wrapper">
-        <div className="container ms-3">
-          <div className="d-flex justify-content-start align-items-baseline">
-            <Link className="navbar-brand" to={"/"}>
-              Afik-Omer Store
-            </Link>
-            <Link className="nav-link active ms-4" aria-current="page" to={"/"}>
-              Home
-            </Link>
-            <Link className="nav-link ms-4" to={"/Cart"}>
-              Cart-Checkout
-            </Link>
-          </div>
-          <div className="position-absolute end-0 me-3">
-            <div id="shopping-cart-wrapper" onClick={onCartClick}>
-              <BsCart3 size={23} />
-              {shoppingQty > 0 && <span id="qty-number"> {shoppingQty}</span>}
-            </div>
+      <nav className="navbar navbar-dark bg-dark d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-start ms-3 align-items-baseline">
+          <Link className="navbar-brand" to={"/"}>
+            Afik-Omer Store
+          </Link>
+          <NavLink
+            className={(navData) =>
+              navData.isActive ? "nav-item active" : "nav-item"
+            }
+            aria-current="page"
+            to={"/"}
+          >
+            Home
+          </NavLink>
+          <NavLink className="nav-item ms-4" to={"/Cart"} onClick={onClose}>
+            Checkout
+          </NavLink>
+        </div>
+        <div className="me-3 text-white">
+          <div
+            id="shopping-cart-wrapper"
+            onClick={onCartClick}
+            className="rounded-circle"
+          >
+            <BsCart3 size={23} />
+            {shoppingQty > 0 && (
+              <span id="qty-number" className="rounded-circle">
+                {" "}
+                {shoppingQty}
+              </span>
+            )}
           </div>
         </div>
       </nav>

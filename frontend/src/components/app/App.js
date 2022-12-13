@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import AppLayout from "./NavbarAndLayout/AppLayout";
 import Home from "./Home/Home";
 import CartPage from "./Carts/CartPage";
@@ -68,7 +68,6 @@ function App() {
             path="/"
             element={
               <AppLayout
-                shoppingQty={userShoppingCart.length}
                 onCartClick={modalToggle}
                 isCartDialogOpen={isCartDialogOpen}
                 cart={userShoppingCart}

@@ -1,16 +1,26 @@
 #user-cart {
   position: fixed;
+  color: white;
   right: 0;
-  width: 300px;
-  height: auto;
-  max-height: 80vh;
+  width: auto;
   display: flex;
   justify-content: center;
-  border: 1px solid #3e546d;
   border-radius: 5px;
-  background-color: #8ec8ec;
+  background-color: #212529;
   z-index: 500;
   overflow: auto;
+  box-shadow: 1px 1px 4px 1px #cecece;
+  height: 90vh;
+}
+
+.btn.btn-primary.btn-checkout {
+  background: #43515e;
+  border-color: #43515e;
+}
+
+.btn.btn-primary.btn-checkout:focus {
+  background: #36424d;
+  border-color: #43515e;
 }
 
 #close-cart {

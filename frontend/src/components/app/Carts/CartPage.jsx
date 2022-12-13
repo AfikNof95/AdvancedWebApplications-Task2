@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Plus, Dash } from "react-bootstrap-icons";
 import axios from "axios";
 import "./CartPage.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function CartPage(props) {
   const {
@@ -32,7 +32,11 @@ function CartPage(props) {
   });
 
   const [isFormValid, setIsFormValid] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
   const deleteCart = () => {
     setUserShoppingCart([]);
   };
@@ -63,7 +67,8 @@ function CartPage(props) {
         url: "http://localhost:2308/Order/Add",
         data: { ...contactInfo, products },
       });
-      alert("Your information submited successfully!");
+      setShowModal(true);
+      deleteCart();
     } catch (err) {
       console.log("There was an error sending the information");
       console.log(err);
@@ -73,14 +78,16 @@ function CartPage(props) {
   return (
     <div id="cart-page-layout" className="container mt-1">
       <div>
-        <h4>Hey User!</h4>
-        {cart.length > 0 && <h5>This is your cart</h5>}
+        {cart.length == 0 && (
+          <h3 className="fw-bolder text-black">Your cart is empty!</h3>
+        )}
       </div>
       {cart.length > 0 && (
         <div id="cart-sum-continer" className="container">
+          <h3 className="fw-bolder text-black">Cart</h3>
           {cart.map((item, index) => (
             <div className="row card-container" key={index}>
-              <div className="card mb-3 cart-card" style={{ paddingLeft: 0 }}>
+              <div className="card cart-card" style={{ paddingLeft: 0 }}>
                 <div className="row align-items-center g-0">
                   <div className="col-2 img-container">
                     <img
@@ -99,27 +106,26 @@ function CartPage(props) {
                         {item.description}
                       </div>
                       <span className="row buttons-section">
-                        <div className="col">
-                          <div className="row">
-                            <button
-                              type="button"
-                              className="col btn btn-success add-remove-btns"
-                              onClick={() => onAddProduct(item, isInCartPage)}
-                            >
-                              +
-                            </button>
-                            <div className="col qty-wrapper ps-2 me-2 ms-2">
-                              {item.qty}
-                            </div>
-                            <button
-                              type="button"
-                              className="col btn btn-danger add-remove-btns"
-                              onClick={() => onRemoveProduct(item)}
-                            >
-                              -
-                            </button>
+                        <div className="row">
+                          <button
+                            type="button"
+                            className="col btn btn-success"
+                            onClick={() => onAddProduct(item, isInCartPage)}
+                          >
+                            <Plus color="white" size={25}></Plus>
+                          </button>
+                          <div className="col qty-wrapper ps-2 me-2 ms-2 d-flex justify-content-center align-items-center">
+                            {item.qty}
                           </div>
+                          <button
+                            type="button"
+                            className="col btn btn-danger"
+                            onClick={() => onRemoveProduct(item)}
+                          >
+                            <Dash color="white" size={25}></Dash>
+                          </button>
                         </div>
+
                         <div className="col"></div>
                       </span>
                     </div>
@@ -137,7 +143,7 @@ function CartPage(props) {
             </div>
           ))}
           <h5>
-            <u>Payment sumerize</u>
+            <u>Payment summarize</u>
           </h5>
           <hr />
           <div className="row">
@@ -161,7 +167,7 @@ function CartPage(props) {
                 <button
                   id="delte-all-cart-btn"
                   type="button"
-                  className="btn btn-outline-danger"
+                  className="btn btn-danger"
                   onClick={deleteCart}
                 >
                   Delete Cart
@@ -171,152 +177,176 @@ function CartPage(props) {
           </div>
         </div>
       )}
-      <div id="person-continer" className="container">
-        <h5 className="mb-3 mt-2">Personal Details To Complete Checkout</h5>
-        <hr />
-        <form onSubmit={onSubmitHandler}>
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="first-name-input" className="form-label">
-                First Name
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="first-name-input"
-                name="firstName"
-              />
+      {cart.length > 0 && (
+        <div id="person-continer" className="container">
+          <h5 className="mb-3 mt-2">Personal Details To Complete Checkout</h5>
+          <hr />
+          <form onSubmit={onSubmitHandler}>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label htmlFor="first-name-input" className="form-label">
+                  First Name
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="text"
+                  className="form-control"
+                  id="first-name-input"
+                  name="firstName"
+                />
+              </div>
+
+              <div className="col-6">
+                <label htmlFor="last-name-input" className="form-label">
+                  Last Name
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="text"
+                  className="form-control"
+                  id="last-name-input"
+                  name="lastName"
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label htmlFor="email-input" className="form-label">
+                  Email address
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="email"
+                  className="form-control"
+                  id="email-input"
+                  name="email"
+                />
+              </div>
+
+              <div className="col-6">
+                <label htmlFor="phone-input" className="form-label">
+                  Phone number
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="number"
+                  className="form-control"
+                  id="phone-input"
+                  name="phone"
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label htmlFor="city-input" className="form-label">
+                  City / Town
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="text"
+                  className="form-control"
+                  id="city-input"
+                  name="city"
+                />
+              </div>
+
+              <div className="col-6">
+                <label htmlFor="street-input" className="form-label">
+                  Street
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="text"
+                  className="form-control"
+                  id="street-input"
+                  name="street"
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label htmlFor="house-number-input" className="form-label">
+                  House Number
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="number"
+                  className="form-control"
+                  id="house-number-input"
+                  name="houseNumber"
+                />
+              </div>
+
+              <div className="col-6">
+                <label htmlFor="zip-input" className="form-label">
+                  Zip Code
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="number"
+                  className="form-control"
+                  id="zip-input"
+                  name="zip"
+                />
+              </div>
             </div>
 
-            <div className="col-6">
-              <label htmlFor="last-name-input" className="form-label">
-                Last Name
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="last-name-input"
-                name="lastName"
-              />
+            <div className="row mb-3">
+              <div className="col-6">
+                <label htmlFor="country-input" className="form-label">
+                  Country
+                </label>
+                <input
+                  required
+                  onChange={handleFormChange}
+                  type="text"
+                  className="form-control"
+                  id="country-input"
+                  name="country"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="email-input" className="form-label">
-                Email address
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="email"
-                className="form-control"
-                id="email-input"
-                name="email"
-              />
+            <div className="row mb-3 p-3">
+              <button
+                type="submit"
+                className="col btn btn-submit"
+                disabled={isCartEmpty}
+              >
+                Submit
+              </button>
             </div>
+          </form>
+        </div>
+      )}
+      <div
+        className={` p-2 flex-row flex-wrap submit-modal ${
+          showModal ? "show" : ""
+        }`}
+      >
+        <div className="w-100">
+          <h3>Thank you for your order</h3>
+        </div>
 
-            <div className="col-6">
-              <label htmlFor="phone-input" className="form-label">
-                Phone number
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="number"
-                className="form-control"
-                id="phone-input"
-                name="phone"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="city-input" className="form-label">
-                City / Town
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="city-input"
-                name="city"
-              />
-            </div>
-
-            <div className="col-6">
-              <label htmlFor="street-input" className="form-label">
-                Street
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="street-input"
-                name="street"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="house-number-input" className="form-label">
-                House Number
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="number"
-                className="form-control"
-                id="house-number-input"
-                name="houseNumber"
-              />
-            </div>
-
-            <div className="col-6">
-              <label htmlFor="zip-input" className="form-label">
-                Zip Code
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="number"
-                className="form-control"
-                id="zip-input"
-                name="zip"
-              />
-            </div>
-          </div>
-
-          <div className="row mb-3">
-            <div className="col-6">
-              <label htmlFor="country-input" className="form-label">
-                Country
-              </label>
-              <input
-                required
-                onChange={handleFormChange}
-                type="text"
-                className="form-control"
-                id="country-input"
-                name="country"
-              />
-            </div>
-          </div>
-          <div className="row">
-            <button
-              type="submit"
-              className="col btn btn-primary"
-              disabled={isCartEmpty}
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+        <div className="w-100 m-auto">
+          <span>Order submitted successfully!</span>
+        </div>
+        <div className="mt-auto w-100 justify-content-end d-flex">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleModalClose}
+          >
+            Ok
+          </button>
+        </div>
       </div>
     </div>
   );

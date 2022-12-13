@@ -12,7 +12,7 @@ function Home(props) {
   }, []);
 
   return (
-    <div id="home-layout">
+    <div id="home-layout" className="mt-3">
       <Container id="display-container">
         <Row>
           {products.map((product) => (
