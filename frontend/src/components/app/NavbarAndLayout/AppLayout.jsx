@@ -32,7 +32,7 @@ function AppLayout(props) {
   }, [cart]);
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark d-flex flex-row justify-content-between">
+      <nav className="navbar sticky-top navbar-dark bg-dark d-flex flex-row justify-content-between">
         <div className="d-flex flex-row justify-content-start ms-3 align-items-baseline">
           <Link className="navbar-brand" to={"/"}>
             Afik-Omer Store
