@@ -9,13 +9,13 @@ function Product(props) {
   const addProductHandler = () => onAddProduct(product);
 
   return (
-    <Card className="card-container" style={{ width: "15rem" }}>
+    <Card className="card-container mb-2" style={{ width: "15rem" }}>
       <Card.Img
         variant="top"
         src={`${product.firstPhotoUrl}`}
         alt={`${product.name}`}
         height="200px"
-        className="card-image"
+        className="card-image mt-2"
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.name}</Card.Title>
@@ -24,7 +24,11 @@ function Product(props) {
         </Card.Text>
         <div id="price-add-wrapper" className="mt-auto">
           <Card.Text>price ${product.price}</Card.Text>
-          <Button variant="primary" onClick={addProductHandler}>
+          <Button
+            variant="primary"
+            className="btn-add"
+            onClick={addProductHandler}
+          >
             Add to cart
           </Button>
         </div>

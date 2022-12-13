@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import "./SideCart.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { X, Plus, Dash } from "react-bootstrap-icons";
 
 function SideCart(props) {
   const { cart, onClose, onAddProduct, onRemoveProduct } = props;
@@ -25,36 +25,36 @@ function SideCart(props) {
           <h4>Cart Items</h4>
         </div>
         <button id="close-cart" onClick={onClose}>
-          X{" "}
+          <X size={25}></X>
         </button>
         <hr style={{ width: "244px" }} />
         <div className="col" id="products-body">
           <div className="row prod-wrapper">
             {cart.map((item) => (
               <div key={item._id} className="row side-cart-row">
-                <div className="col-4 items-title-in-row">{item.name}</div>
-                <div className="col-8 btns-price-section">
+                <div className="col-3 items-title-in-row me-3">{item.name}</div>
+                <div className="col-7 btns-price-section">
                   <button
                     type="button"
-                    className="btn btn-success add-remove-btns"
+                    className="btn btn-success col "
                     style={{ padding: 0 }}
                     onClick={() => onAddProduct(item)}
                   >
-                    +
+                    <Plus color="white" size={15}></Plus>
                   </button>
-                  <span>{item.qty}</span>
+                  <span className="col">{item.qty}</span>
                   <button
                     type="button"
-                    className="btn btn-danger add-remove-btns"
+                    className="btn btn-danger col"
                     style={{ padding: 0 }}
                     onClick={() => onRemoveProduct(item)}
                   >
-                    -
+                    <Dash color="white" size={15}></Dash>
                   </button>
-                  <span className="text-right">
-                    ${(item.qty * item.price).toFixed(2)}
-                  </span>
                 </div>
+                <span className="col-1">
+                  ${(item.qty * item.price).toFixed(2)}
+                </span>
               </div>
             ))}
             {cart.length !== 0 && (
@@ -87,12 +87,20 @@ function SideCart(props) {
         </div>
         <div className="bottom-section">
           {checkoutBtnDisabled ? (
-            <button type="button" className="btn btn-info" disabled>
+            <button
+              type="button"
+              className="btn btn-primary btn-checkout"
+              disabled
+            >
               Checkout
             </button>
           ) : (
             <Link to={"/Cart"}>
-              <button type="button" className="btn btn-info">
+              <button
+                type="button"
+                className="btn btn-primary btn-checkout"
+                onClick={onClose}
+              >
                 Checkout
               </button>
             </Link>

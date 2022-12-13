@@ -1,3 +1,16 @@
 .card-image {
-    border-radius: 55px;
+  border-radius: 55px;
+}
+.card-container {
+  background: #b8c8d7 !important;
+}
+
+.btn.btn-primary.btn-add {
+  background: #43515e;
+  border-color: #43515e;
+}
+
+.btn.btn-primary.btn-add:focus {
+  background: #36424d;
+  border-color: #43515e;
 }
